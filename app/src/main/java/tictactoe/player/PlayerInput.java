@@ -59,8 +59,8 @@ public class PlayerInput {
 
             if (input.isBlank() || input.isEmpty()) {
                 System.out.println("\nError: move cannot be blank or empty.");
-            } else if (input.length() > 2) {
-                System.out.println("\nError: move cannot exceed 2 characters.");
+            } else if (input.length() != 2) {
+                System.out.println("\nError: move must have exactly 2 characters.");
             } else if (!Character.isLetter(input.charAt(0))) {
                 System.out.println("\nError: move's column (first character) must be a letter.");
             } else if (!Character.isDigit(input.charAt(1))) {
