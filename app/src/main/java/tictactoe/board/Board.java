@@ -248,7 +248,7 @@ public class Board {
             }
         }
 
-        //Collections.shuffle(availableCellPositions);
+        Collections.shuffle(availableCellPositions);
         return availableCellPositions;
     }
 }
