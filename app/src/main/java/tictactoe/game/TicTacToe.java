@@ -19,22 +19,26 @@ public class TicTacToe {
         this.numOfMatches = 0;
     }
 
-    private void setHumanPlayer(int id) {
-        assert(id == 1 || id == 2);
-
-        Player player = new Player("", id, true);
+    private void setHumanPlayer(PlayerType playerType) {
+        int id = playerType.getId();
+        CellValue cellValue = playerType.getCellValue();
 
         System.out.println(String.format("\nPLAYER %d", id));
-        System.out.println(String.format("    Piece: %s", player.getCellValue()));
-        player.setName(PlayerInput.getName());
+        System.out.println(String.format("    Piece: %s", cellValue));
+        String name = PlayerInput.getName();
 
-        players[id - 1] = player;
+        players[id - 1] = new Player(name, id, true);
     }
 
-    private void setMachinePlayer(String name, int id) {
-        assert(id == 1 || id == 2);
+    private void setMachinePlayer(String name, PlayerType playerType) {
+        int id = playerType.getId();
 
         players[id - 1] = new Player(name, id, false);
+    }
+
+    private void setFirstPlayer() {
+        assert(players.length == 2);
+        currentPlayer = players[randomInteger(0, 1)];
     }
 
     private void initialSettings() {
@@ -43,17 +47,17 @@ public class TicTacToe {
         }
 
         if (gameMode == GameMode.HUMAN_VS_HUMAN) {
-            setHumanPlayer(1);
-            setHumanPlayer(2);
+            setHumanPlayer(PlayerType.PLAYER_X);
+            setHumanPlayer(PlayerType.PLAYER_O);
         } else if (gameMode == GameMode.HUMAN_VS_MACHINE) {
-            setHumanPlayer(1);
-            setMachinePlayer("Machine", 2);
+            setHumanPlayer(PlayerType.PLAYER_X);
+            setMachinePlayer("Machine", PlayerType.PLAYER_O);
         } else {
-            setMachinePlayer("Machine 1", 1);
-            setMachinePlayer("Machine 2", 2);
+            setMachinePlayer("Machine 1", PlayerType.PLAYER_X);
+            setMachinePlayer("Machine 2", PlayerType.PLAYER_O);
         }
 
-        currentPlayer = players[0];
+        setFirstPlayer();
     }
 
     private void humanVersusHumanGameplay() {
@@ -244,7 +248,7 @@ public class TicTacToe {
     }
 
     private int randomInteger(int min, int max) {
-        return new Random().nextInt(min, max);
+        return new Random().nextInt(min, max + 1);
     }
 
     private void sleep(int seconds, String message) {
