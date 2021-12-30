@@ -119,6 +119,8 @@ public class TicTacToe {
 
             board.draw();
         } while (PlayerInput.playAgain());
+
+        PlayerInput.closeScanner();
     }
 
     private int checkWinner() {
