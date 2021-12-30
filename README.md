@@ -4,4 +4,6 @@ Object-oriented tic-tac-toe game written in Java using the Minimax algorithm to 
 
 ## Running
 
-Open a terminal int the root folder of this project and run: `gradle run`
+- First, you'll need to [install Gradle](https://gradle.org/install/) on your environment.
+
+- Then, open a terminal in the root folder of this project and run: `gradle run`
