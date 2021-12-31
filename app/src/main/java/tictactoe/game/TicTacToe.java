@@ -134,14 +134,12 @@ public class TicTacToe {
     }
 
     private boolean isFinished() {
-        int winnerId = checkWinner();
+        GameStatus gameStatus = getGameStatus();
 
-        if (winnerId == 0) {
-            if (board.isFull()) {
-                showTieMessage();
-            } else {
-                return false;
-            }
+        if (gameStatus == GameStatus.RUNNING) {
+            return false;
+        } else if (gameStatus == GameStatus.TIE) {
+            showTieMessage();
         } else {
             showWinner();
         }
